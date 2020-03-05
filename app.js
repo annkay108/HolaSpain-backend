@@ -10,6 +10,9 @@ const cors = require('cors');
 require('dotenv').config();
 
 const auth = require('./routes/auth');
+const user = require('./routes/user');
+const notice = require('./routes/notice');
+const setStatus = require('./routes/setStatus');
 
 
 // MONGOOSE CONNECTION
@@ -68,7 +71,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // ROUTER MIDDLEWARE
 app.use('/auth', auth);
-
+app.use('/user',user);
+app.use('/notice',notice);
+app.use('/setstatus',setStatus);
 
 // 404 
 // catch 404 and forward to error handler

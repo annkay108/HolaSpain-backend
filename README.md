@@ -120,8 +120,9 @@ Notice Model
 
 ```javascript
 {
-   AdminId: {type: Schema.Types.ObjectId,ref:'User'},
-   Content: {type: String, required: true}
+  adminId: {type: Schema.Types.ObjectId,ref:'User'},
+  title: {type: String, required: true},
+  content: {type: String, required: true}
 }
 ```
 
