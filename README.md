@@ -137,11 +137,8 @@ Notice Model
 | POST        | `/auth/login`             | {username, password}              | 200            | 401          | Checks if fields not empty (422), if user exists (404), and if password matches (404), then stores user in session |
 | POST        | `/auth/logout`            | (empty)                           | 204            | 400          | Logs out the user                                            |
 | GET         | `/user`                   |                                   |                | 400          | Show all contacts                                            |
-| GET         | `/user/:id`               | {id}                              |                |              | Show specific contact                                        |
-| GET         | `/profile`                |                                   |                | 400          | Shows the users profile                                      |
-| GET         | `/status`                 |                                   |                | 400          | Shows the status of your applicationGET                      |
-| GET         | `/admin`                  |                                   |                | 400          | Shows the homepage of an admin                               |
-| PUT         | `/profile/edit/:id`       | {name, number, city, coordinates} | 200            | 404          | Edit the profile                                             |
+| GET         | `/user/:id`               | {id}                              |                |              | Show specific contact                                        |                    |
+| GET         | `/admin`                  |                                   |                | 400          | Shows the homepage of an admin                               |                                            |
 | GET         | `/notice`                 |                                   |                | 400          | Shows the notice to the user                                 |
 | DELETE      | `/notice/delete/:id`      | {id}                              | 200            | 400          | Delete the notice                                            |
 | GET         | `/admin/applications`     |                                   |                | 400          | Gets the application of the user                             |
