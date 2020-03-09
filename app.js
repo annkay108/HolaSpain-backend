@@ -13,6 +13,7 @@ const auth = require('./routes/auth');
 const user = require('./routes/user');
 const notice = require('./routes/notice');
 const setStatus = require('./routes/setStatus');
+const cloudinaryRouter = require('./routes/cloudinary');
 
 
 // MONGOOSE CONNECTION
@@ -74,6 +75,7 @@ app.use('/auth', auth);
 app.use('/user',user);
 app.use('/notice',notice);
 app.use('/setstatus',setStatus);
+app.use('/cloudinary', cloudinaryRouter);
 
 // 404 
 // catch 404 and forward to error handler
