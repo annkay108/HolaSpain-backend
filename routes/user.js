@@ -10,7 +10,7 @@ const {
 // Get all users
 router.get('/', isLoggedIn, async(req, res, next)=>{
     try{
-        const allUser = await User.find({});
+        const allUser = await User.find({}).populate("requests friends pending");
         res.status(201).json(allUser);
     }
     catch (error){
