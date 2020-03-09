@@ -1,8 +1,9 @@
-const express = require('express');
-const router = express.Router();
 const mongoose = require('mongoose');
-const parser = require('./../config/cloudinary');
-const User = require("../models/user");
+const express  = require('express');
+const parser   = require('./../config/cloudinary');
+const User     = require("../models/user");
+
+const router = express.Router();
 
 
 router.post('/image', parser.single('image'), async(req,res,next)=> {  

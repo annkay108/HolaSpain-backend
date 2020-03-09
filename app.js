@@ -1,19 +1,20 @@
-const express = require('express');
-const path = require('path');
-const logger = require('morgan');
 const cookieParser = require('cookie-parser');
-const bodyParser = require('body-parser');
-const mongoose = require('mongoose');
-const session = require('express-session');
-const MongoStore = require('connect-mongo')(session);
-const cors = require('cors');
+const bodyParser   = require('body-parser');
+const MongoStore   = require('connect-mongo')(session);
+const mongoose     = require('mongoose');
+const express      = require('express');
+const session      = require('express-session');
+const logger       = require('morgan');
+const path         = require('path');
+const cors         = require('cors');
+
 require('dotenv').config();
 
-const auth = require('./routes/auth');
-const user = require('./routes/user');
-const notice = require('./routes/notice');
-const setStatus = require('./routes/setStatus');
 const cloudinaryRouter = require('./routes/cloudinary');
+const setStatus        = require('./routes/setStatus');
+const notice           = require('./routes/notice');
+const auth             = require('./routes/auth');
+const user             = require('./routes/user');
 
 
 // MONGOOSE CONNECTION
@@ -35,7 +36,8 @@ const app = express();
 app.use(
   cors({
     credentials: true,
-    origin: [process.env.PUBLIC_DOMAIN],
+    origin: [process.env.PUBLIC_DOMAIN,
+      "https://hola-spain.herokuapp.com"]
   }),
 );
 // app.use((req, res, next) => {
@@ -76,6 +78,12 @@ app.use('/user',user);
 app.use('/notice',notice);
 app.use('/setstatus',setStatus);
 app.use('/cloudinary', cloudinaryRouter);
+
+// ROUTE FOR SERVING REACT APP (index.html)
+app.use((req, res, next) => {
+  // If no routes match, send them the React HTML.
+  res.sendFile(__dirname + "/public/index.html");
+});
 
 // 404 
 // catch 404 and forward to error handler

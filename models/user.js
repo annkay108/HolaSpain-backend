@@ -1,21 +1,22 @@
-const mongoose = require('mongoose');
+const mongoose  = require('mongoose');
 const AppStatus = require('./appStatus');
+
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
-  userName: {type: String, required: true},
-  password: {type: String, required: true, unique: true},
-  isAdmin: {type: Boolean, required: true},
-  number: {type: Number},
-  imageUrl: {type: String},
   applicationUrl: {type: String},
-  documentUrl: {type: String},
-  email: {type: String, required: true, unique: true},
-  city: {type: String},
-  friends: [{type: Schema.Types.ObjectId,ref:'User'}],
+  documentUrl:    {type: String},
+  imageUrl:       {type: String},
+  number:         {type: Number},
+  city:           {type: String},
+  password: {type: String, required: true, unique: true},
+  email:    {type: String, required: true, unique: true},
+  userName: {type: String, required: true},
+  isAdmin:  {type: Boolean, required: true},
   requests: [{type: Schema.Types.ObjectId,ref:'User'}],
-  pending: [{type: Schema.Types.ObjectId,ref:'User'}],
-  appStatus: [{type: Schema.Types.ObjectId, ref:'AppStatus'}]
+  friends:  [{type: Schema.Types.ObjectId,ref:'User'}],
+  pending:  [{type: Schema.Types.ObjectId,ref:'User'}],
+  appStatus:[{type: Schema.Types.ObjectId, ref:'AppStatus'}]
 });
 
 const User = mongoose.model('User', userSchema);
