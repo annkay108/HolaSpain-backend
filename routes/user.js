@@ -81,6 +81,18 @@ router.post('/add/:id',isLoggedIn,async(req, res, next) => {
     }
 })
 
+// Set the application status to true
+router.post('/setstatus', isLoggedIn, async(req, res, next) => {
+    const myId = req.session.currentUser._id;
+    try{
+        const updateStatus = await User.findByIdAndUpdate(myId, {hasApplied: true});
+        res.status(200).json("updated the status to true");
+    }
+    catch (error){
+        next(createError(error));
+    }
+})
+
 // Accept the button and add it to the friends list
 router.post("/accept/:id", isLoggedIn, async(req, res, next)=>{
     const myId = req.session.currentUser._id;
