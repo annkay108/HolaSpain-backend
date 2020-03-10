@@ -21,7 +21,7 @@ router.get('/', isLoggedIn, async(req, res, next)=>{
 // get any user by id
 router.get('/:id', isLoggedIn, async(req, res, next)=>{
     try{
-        const user = await User.findById(req.params.id);
+        const user = await User.findById(req.params.id).populate("appStatus");
         res.status(201).json(user);
     }
     catch (error){
