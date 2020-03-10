@@ -8,7 +8,7 @@ const{
     isAdmin, isLoggedIn
 }= require("../helpers/middlewares");
 
-router.post('/add/:id',isLoggedIn, isAdmin, async(req, res, next)=>{
+router.post('/add/:id',isLoggedIn, async(req, res, next)=>{
     try {
       const {id}= req.params;
       const {title, description} = req.body;

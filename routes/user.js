@@ -10,7 +10,7 @@ const {
 // Get all users
 router.get('/', isLoggedIn, async(req, res, next)=>{
     try{
-        const allUser = await User.find({}).populate("requests friends pending");
+        const allUser = await User.find({}).populate("requests friends pending appStatus");
         res.status(201).json(allUser);
     }
     catch (error){
@@ -33,6 +33,7 @@ router.get('/:id', isLoggedIn, async(req, res, next)=>{
 router.put('/:id', isLoggedIn, async(req, res, next)=>{
     const{id} = req.params;
     const{userName, number, city} =req.body;
+    console.log("are you getting the data", req.body);
     try
     {
         await User.findByIdAndUpdate(id, {userName, number, city})
@@ -101,6 +102,7 @@ router.post("/accept/:id", isLoggedIn, async(req, res, next)=>{
         const addOnMyContact = await User.findByIdAndUpdate(myId, {$push: {friends: requestId}}).populate('friends');
         const addContact = await User.findByIdAndUpdate(requestId,{$push:{friends: myId}}).populate('friends');
         const deleteFromContact = await User.findByIdAndUpdate(myId, {$pull:{requests: requestId}});
+        const deleteFromPending = await User.findByIdAndUpdate(requestId,{$pull:{pending: myId}});
         res.status(200).json(`you have to check yourself if it worked`);
     } 
     catch (error) {
