@@ -30,8 +30,9 @@ router.post('/add', isLoggedIn, isAdmin, async(req, res, next)=>{
 router.delete('/delete/:id', isLoggedIn, isAdmin, async(req, res, next)=>{
     const {id} = req.params;
     try {
-       await Notice.findByIdAndRemove(id)
-       res.status(200).json("deletedNotice"); 
+       await Notice.findByIdAndRemove(id);
+       const data = await Notice.find({});
+       res.status(200).json(data); 
     } catch (error) {
         next (createError(error));
     }

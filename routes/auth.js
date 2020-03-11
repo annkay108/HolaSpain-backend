@@ -44,7 +44,7 @@ router.post('/login', isNotLoggedIn, validationLogin, async (req, res, next) => 
   try {
     const user = await User.findOne({ email }) ;
     if (!user) {
-      next(createError(404));
+      res.status(200).json("User doesn't exist");
     } 
     else if (bcrypt.compareSync(password, user.password)) {
       
@@ -56,7 +56,7 @@ router.post('/login', isNotLoggedIn, validationLogin, async (req, res, next) => 
     //return;	 			TODO - remove from the notes
     } 
     else {
-      next(createError(401));	// Unauthorized
+      res.status(200).json("Incorrect password");	// Unauthorized
     }
   } 
   catch (error) {
