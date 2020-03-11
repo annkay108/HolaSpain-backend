@@ -6,7 +6,7 @@ const Schema = mongoose.Schema;
 const userSchema = new Schema({
   applicationUrl: {type: String},
   documentUrl:    {type: String},
-  imageUrl:       {type: String},
+  imageUrl:       {type: String, default:"https://cdn1.iconfinder.com/data/icons/people-49/512/_nerd_man-512.png"},
   number:         {type: Number},
   city:           {type: String},
   hasApplied:{type: Boolean, default: false},
