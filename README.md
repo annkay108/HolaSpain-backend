@@ -53,7 +53,7 @@ Admin profile:
 | `/admin`                      | AdminHomePage         | Admin only `<PrivateRoute>`      | Shows the admins home page                                   |
 | `/admin/applications`         | ApplicationsPage      | Admin only `<PrivateRoute>`      | Shows the list of application                                |
 | `/admin/applications/:userid` | UserApplicationPage   | Admin only `<PrivateRoute>`      | Shows the application of the specific user and setting the status of the user |
-| `/logout`                     | n/a                   | Users and admin `<PrivateRoute>` | Navigate to homepage after logout, expire session            |
+| `/logout`                     | N/A                   | Users and admin `<PrivateRoute>` | Navigate to homepage after logout, expire session            |
 | `/contacts/add/:id`           | ContactPage           | User only `<PrivateRoute>`       | Add the user contact                                         |
 | `/contacts/remove/:id`        | UserProfilePage       | User only `<PrivateRoute>`       | Remove the contact from the user's contact list              |
 | `/notice`                     | Notice                | User only `<PrivateRoute>`       | Shows the notices added by the admin                         |
