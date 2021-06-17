@@ -1,6 +1,5 @@
-const cookieParser = require('cookie-parser');
-const bodyParser   = require('body-parser');
 const session      = require('express-session');
+const cookieParser = require('cookie-parser');
 const MongoStore   = require('connect-mongo')(session);
 const mongoose     = require('mongoose');
 const express      = require('express');
@@ -22,7 +21,9 @@ mongoose
   .connect(process.env.MONGODB_URI, {
     keepAlive: true,
     useNewUrlParser: true,
-    reconnectTries: Number.MAX_VALUE,
+    useFindAndModify: false,
+    useCreateIndex: true,
+    useUnifiedTopology: true
   })
   .then( () => console.log(`Connected to database`))
   .catch( (err) => console.error(err));
@@ -55,7 +56,7 @@ app.use(
       mongooseConnection: mongoose.connection,
       ttl: 24 * 60 * 60, // 1 day
     }),
-    secret: process.env.SECRET_SESSION,
+    secret: process.env.SESSION_SECRET,
     resave: true,
     saveUninitialized: true,
     cookie: {
@@ -66,8 +67,8 @@ app.use(
 
 // MIDDLEWARE
 app.use(logger('dev'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
