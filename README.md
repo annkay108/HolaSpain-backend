@@ -133,8 +133,8 @@ Notice Model
 | HTTP Method | URL                       | Request Body                      | Success status | Error Status | Description                                                  |
 | ----------- | ------------------------- | --------------------------------- | -------------- | ------------ | ------------------------------------------------------------ |
 | GET         | `/auth/me`                | Saved session                     | 200            | 404          | Check if user is logged in and return profile page           |
-| POST        | `/auth/signup`            | {name, email, password}           | 201            | 404          | Checks if fields not empty (422) and user not exists (409), then create user with encrypted password, and store user in session |
-| POST        | `/auth/login`             | {username, password}              | 200            | 401          | Checks if fields not empty (422), if user exists (404), and if password matches (404), then stores user in session |
+| POST        | `/auth/signup`            | {userName, email, password, isAdmin}           | 201            | 404          | Checks if fields not empty (422) and user not exists (409), then create user with encrypted password, and store user in session |
+| POST        | `/auth/login`             | {email, password}              | 200            | 401          | Checks if fields not empty (422), if user exists (404), and if password matches (404), then stores user in session |
 | POST        | `/auth/logout`            | (empty)                           | 204            | 400          | Logs out the user                                            |
 | GET         | `/user`                   |                                   |                | 400          | Show all contacts                                            |
 | GET         | `/user/:id`               | {id}                              |                |              | Show specific contact                                        |                    |
