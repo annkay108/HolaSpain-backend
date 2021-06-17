@@ -1,6 +1,6 @@
 const session      = require('express-session');
 const cookieParser = require('cookie-parser');
-const MongoStore   = require('connect-mongo')(session);
+const MongoStore   = require('connect-mongo');
 const mongoose     = require('mongoose');
 const express      = require('express');
 const logger       = require('morgan');
@@ -32,7 +32,6 @@ mongoose
 // EXPRESS SERVER INSTANCE
 const app = express();
 
-
 // CORS MIDDLEWARE SETUP
 app.use(
   cors({
@@ -41,19 +40,26 @@ app.use(
       "https://hola-spain.herokuapp.com"]
   }),
 );
-// app.use((req, res, next) => {
-//   res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
-//   res.setHeader('Access-Control-Allow-Methods', 'GET, PUT, POST, OPTIONS, DELETE');
-//   res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-//   res.setHeader('Access-Control-Allow-Credentials', true);
-//   next();
-// });
+
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, PUT, POST, OPTIONS, DELETE');
+  res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  res.setHeader('Access-Control-Allow-Credentials', true);    
+  
+  if ('OPTIONS' === req.method) {
+    res.send(200);
+  }
+  else {
+    next();
+  }
+});
 
 // SESSION MIDDLEWARE
 app.use(
   session({
-    store: new MongoStore({
-      mongooseConnection: mongoose.connection,
+    store: MongoStore.create({
+      mongoUrl: process.env.MONGODB_URI,
       ttl: 24 * 60 * 60, // 1 day
     }),
     secret: process.env.SESSION_SECRET,
